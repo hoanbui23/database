@@ -228,7 +228,15 @@ FOREIGN KEY (food_id) REFERENCES food(food_id)
    	ORDER BY   
    	total_order DESC
    	LIMIT 1
-   	    -- Tìm Người đã đặt nhiều nhất 
+-- Tìm người dùng không hoạt động trong hệ thống 
+	SELECT *
+	FROM users 
+	LEFT JOIN like_res  ON users.user_id = like_res.user_id
+	LEFT JOIN rate_res  ON users.user_id = like_res.user_id
+	LEFT JOIN orders  ON users.user_id = like_res.user_id
+	WHERE like_res.user_id IS NULL
+  	AND rate_res.user_id IS NULL
+  	AND orders.user_id IS NULL;
    	
    	
    	
